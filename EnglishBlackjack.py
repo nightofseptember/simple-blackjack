@@ -2,30 +2,30 @@ import random
 
 
 # cards get handed out
-def delKort(tur):
-    kort = random.choice(deck)
-    tur.append(kort)
-    deck.remove(kort)
+def dealCard(turn):
+    card = random.choice(deck)
+    turn.append(card)
+    deck.remove(card)
 
 # Calculates each hand
-def total(tur):
+def total(turn):
     total = 0
     ace_11s = 0
-    for kort in tur:
-        if kort in range(11):
-            total += kort
-        elif kort in ['J', 'K', 'Q']:
+    for card in turn:
+        if card in range(11):
+            total += card
+        elif card in ['J', 'K', 'Q']:
             total += 10
         else:
             total += 11
             ace_11s += 1
-    while ace_11s and total > 21:
+    while ace_11s and total > 21:  #No idea how this shi works it was just a fix i found
         total -= 10
         ace_11s -= 1
-    return total
+    return total    
 
 # checks for winner
-def visDealerHand(): #vshows dealerhand
+def showDealerHand(): #vshows dealerhand
     if len(dealerHand) == 2:
         return dealerHand[0]
     elif len(dealerHand) > 2:
@@ -39,11 +39,11 @@ while True:
     dealerHand = []
 
     for _ in range(2):
-        delKort(dealerHand)
-        delKort(playerHand)
+        dealCard(dealerHand)
+        dealCard(playerHand)
 
     while playerIn or dealerIn:
-        print(f"Dealer has {visDealerHand()}")
+        print(f"Dealer has {dealerHand} for a total of {total(dealerHand)}")
         print(f"You have {playerHand} for a total of {total(playerHand)}")
 
 # Player turn
@@ -52,7 +52,7 @@ while True:
             if stayOrHit == '1':
                 playerIn = False
             else:
-                delKort(playerHand)
+                dealCard(playerHand)
             if total(playerHand) >= 21:
                 break
 
@@ -61,34 +61,34 @@ while True:
             if total(dealerHand) > 17:
                 dealerIn = False
             else:
-                delKort(dealerHand)
+                dealCard(dealerHand)
 # If bust no dice
         if total(playerHand) >= 21 or total(dealerHand) >= 21:
             break
 
     if total(playerHand) == 21:
         print(f"\You have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
-        print("Blackjack!")
+        print("BLACKJACK! you won")
     elif total(dealerHand) == 21:
         print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
-        print("You busted, Dealer Won")
+        print("2")
     elif total(playerHand) > 21:
         print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
-        print("You busta, Dealer vant")
+        print("3")
     elif total(dealerHand) > 21:
         print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")    
-        print("Dealer busted, You won")
+        print("4")
     elif 21 - total(dealerHand) < 21 - total(playerHand):
         print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")  
-        print("dealer won")
+        print("5")
     elif 21 - total(dealerHand) > 21 - total(playerHand):
         print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")  
-        print("Du won")
+        print("6")
 
 
 
 
-    spilleIgjen = input("\nDo you wanna play again (Yes/No): ").lower()
-    if spilleIgjen != 'yes':
+    playAgain = input("\nDo you wanna play again (Yes/No): ").lower()
+    if playAgain != 'yes':
         print("Well played, see you next time.")
         break  # Exit the loop to end the game
