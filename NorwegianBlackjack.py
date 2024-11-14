@@ -25,7 +25,7 @@ def total(tur):
     return total    
 
 # sjekker for vinner
-def visForhandlerHånd(): #vshows dealerhand
+def visForhandlerHånd(): #viser dealerhand
     if len(forhandlerhånd) == 2:
         return forhandlerhånd[0]
     elif len(forhandlerhånd) > 2:
@@ -46,7 +46,7 @@ while True:
         print(f"Forhandler har {forhandlerhånd} {total(forhandlerhånd)}")
         print(f"Du har {spillerhånd} for en total av {total(spillerhånd)}")
 
-#spiller tur
+# spiller sin tur
         if playerIn:
             stayOrHit = input("1: Stay\n2: Hit\n")
             if stayOrHit == '1':
@@ -62,7 +62,7 @@ while True:
                 dealerIn = False
             else:
                 delKort(forhandlerhånd)
-# hvis du buster no dice
+# hvis du buster ingen dice
         if total(spillerhånd) >= 21 or total(forhandlerhånd) >= 21:
             break
 
@@ -91,4 +91,4 @@ while True:
     spillIgjen = input("\nVill du spille igjen (Ja/Nei):? ").lower()
     if spillIgjen != 'ja':
         print("Bra spilt ses igjen")
-        break  # Exit the loop to end the game
+        break  # går ut av loop til å slutte spillet

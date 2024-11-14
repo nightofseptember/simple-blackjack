@@ -25,7 +25,7 @@ def total(turn):
     return total    
 
 # checks for winner
-def showDealerHand(): #vshows dealerhand
+def showDealerHand(): # shows dealerhand
     if len(dealerHand) == 2:
         return dealerHand[0]
     elif len(dealerHand) > 2:
